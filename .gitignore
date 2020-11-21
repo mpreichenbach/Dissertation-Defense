@@ -1,6 +1,8 @@
 *
+!Images/*.png
 !*.tex
 !*.pdf
 !*.png
+!*.bib
 !*.md
 !.gitignore

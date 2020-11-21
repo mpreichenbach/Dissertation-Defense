@@ -4,10 +4,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{biblatex}
+\addbibresource{references.bib}
 
-\title[Density Dependent Growth]{A Limit-set Trichotomy for a Density-Dependent Integral Projection Model}
-\author[Matt Reichenbach]{Matt Reichenbach}
-\date[\today]{STAARS, \today}
+\title[Dissertation Defense]{Spectral Properties of a Non-compact Operator in Ecology}
+\author[Matt Reichenbach]{Matt Reichenbach \\ \, \\ Advised by Richard Rebarber and Brigitte Tenhumberg}
+\date[November 25, 2020]{Dissertation Defense, November 25, 2020}
 
 \begin{document}
 
@@ -23,9 +25,120 @@
 \begin{frame}
 \frametitle{Introduction}
 	\begin{itemize}
-		\item blah blah
+		\item Integral projection models (IPMs) are stage-structured population models of the form
+		\[\varphi_{t+1} = A \varphi_t := \int_L^U k(y, x) \varphi_t(x) \, dx,\]
+		\pause
+		where $\varphi_t$ gives the population distribution at time $t$, the limits $L$, $U$ are the lower- and upper-limits of the structure variable $x$, and the kernel $k(y, x)$ determines how individuals of size $x$ contribute to those of size $y$ in the next time step.
+		\pause
+		\item IPMs generalize Leslie matrices by allowing for a continuous structure variable.
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item We will consider kernel functions of the form
+		\[k(y, x) = s(x) g(y, x) + b(y)f(x),\]
+		\pause
+		where 
+		\pause
+		\begin{itemize}
+			\item $s(x)$ is the survival function,
+			\pause
+			\item $g(y, x)$ is the growth subkernel,
+			\pause
+			\item $b(y)$ is the offspring distribution, 
+			\pause
+			\item and $f(x)$ the fecundity function.	
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item When individuals are allowed to increase or decrease over the time step, the kernel function $k(y, x)$ of the IPM operator $A$ will be bounded.
+		\pause
+		\item For example, this is the case when the structure variable $x$ is stem diameter, or individual biomass.
+		\pause
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+		In this case, Ellner \& Rees, in appendices to \cite{Ellner2006}, proved the theorem:
+	\pause
+	\begin{theorem}
+		Suppose $A$ is an IPM operator whose kernel $k(y, x)$ is positive and continuous on $[L, U]^2$. Then $\lambda = r(A)$ is an eigenvalue of $A$, and its eigenvector $\psi$ can be scaled to be positive. Additionally, $\lambda$ is the asymptotic growth rate of the population, and $\psi$ is the stable stage distribution, in the sense that for any nonzero initial population $\varphi_0$,
+		\[\lim_{n \to \infty} \frac{A^n \varphi_0}{\lambda^n} = \langle \psi, \varphi_0 \rangle \psi. \]
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item However, ecologists have since used IPMs to model individuals that \emph{cannot} shrink from one time step to the next.
+		\pause
+		\item For example, Vindenes et. al in \cite{Vindenes2014} modeled fish, and used length as the structure variable $x$.
+		\pause
+		\item Fish have bony skeletons, and hence cannot shrink in length.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item Ellner \& Rees's theorem implicitly assumed that individuals could shrink; if they cannot shrink the kernel will be unbounded.
+		\pause
+		\item All IPMs assume that $g(\cdot, x)$ is a probability distribution; that is:
+		\[\int_L^U g(y, x) \, dy = 1, \quad \text{for all } x \in [L,U].\]
+		\pause
+		\item The assumption that individuals cannot shrink is that
+		\[g(y, x) = 0, \text{whenever } y < x.\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+\begin{center}
+	\includegraphics[width=\linewidth]{"Images/Growth Kernel Plot"}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item With an IPM which models a population whose individuals cannot shrink, we have some questions to answer:
+		\pause
+		\begin{itemize}
+			\item Is the operator $T$ still compact?
+			\pause
+			\item Is $\lambda = r(T)$ still an eigenvalue of $T$?
+			\pause
+			\item Are $\lambda$ and its eigenvector $\psi$ still the asymptotic growth rate and stable stage distribution, respectively, of the population?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$T$ is Not Compact}
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
+		\printbibliography
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{}
+%	\begin{itemize}
+%		\item 
+%	\end{itemize}
+%\end{frame}
+
 
 \end{document}
 
