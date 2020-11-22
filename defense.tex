@@ -2,10 +2,17 @@
 \usetheme{Madrid}
 
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath, mathrsfs}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{biblatex}
 \addbibresource{references.bib}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\dd}{{\delta}}
+\newcommand{\ee}{{\varepsilon}}
 
 \title[Dissertation Defense]{Spectral Properties of a Non-compact Operator in Ecology}
 \author[Matt Reichenbach]{Matt Reichenbach \\ \, \\ Advised by Richard Rebarber and Brigitte Tenhumberg}
@@ -121,10 +128,179 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\item To be clear, our operators act on the space $L^1 = L^1(\Omega)$ of integrable functions on $\Omega:=[L,U]$. This is the natural space to work in, because the $L^1$-norm of a population distribution gives its total size.
+		\pause
+		\item Let $G:L^1 \to L^1$ denote the integral operator with kernel $g(y, x)$, the growth subkernel in the IPM:
+		\pause
+		\[(G\varphi)(y) := \int_L^U g(y, x) \, dx.\]
+		\pause
+		\item Let $S:L^1 \to L^1$ be multiplication by $s(x)$.
+		\pause
+		\item Let $F : L^1 \to \R$ be the fecundity functional $F\varphi : = \int_L^U f(x) \varphi(x) \, dx$.
+		\pause
+		\item Then the IPM operator $T$ can be written $T = GS + bF$, where $b = b(y)$ is the offspring distribution.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$T$ is Not Compact}
+		\begin{theorem}[Reichenbach, 2018]
+			If $g(y, x)$ is the growth subkernel for an IPM which satisfies $g(y, x) = 0$ for $y < x$, then its associated integral operator $G$ is not compact.
+		\end{theorem}
+	\pause
+	\begin{corollary}
+		The IPM operator $T:= GS + bF$ is not compact.
+	\end{corollary}
+	\pause
+	\begin{proof}[Proof Sketch of Corollary]
+		An assumption of $s(x)$ is that $0 < s_0 \leq s(x)$ for all $x \in [L, U]$, so we can write
+		\[G = \frac{T - bF}{s(x)}.\]
+		Hence, $G$ and $T$ must be compact/non-compact together.
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$T$ is Not Compact}
+		\begin{proof}[Proof Sketch for Theorem]
+			\begin{itemize}
+			\item To show that $G$ is not compact, we can show something stronger: $G$ is not \emph{weakly} compact.
+			\pause
+			\item Let $\mathscr{U} \subset L^1$ be the unit ball. A theorem in Dunford \& Schwartz \cite{Dunford1958} says that the set $G(\mathscr{U})$ is weakly compact on $L^1(\Omega)$ iff
+			\begin{equation}
+				\lim_{\mu(E) \to 0} \int_E (G\varphi)(t) \, dt = 0 \label{weakcompact}
+			\end{equation}
+			uniformly for $\varphi \in \mathscr{U}$, where $\mu$ is the Lebesgue measure.
+			\pause
+			\item Put $\dd_n := \frac 1n (U-L)$, and define $E_n:= [U-\dd_n, U]$; then $\mu(E_n) \to 0$.
+			\pause
+			\item Define $h_n(t) : = \frac{1}{\dd_n} \chi_{E_n}(t)$; then $h_n \in \mathscr{U}$. The limit \eqref{weakcompact} is not uniform on the collection $\{h_n\}$. Therefore, $G$ is not weakly compact.
+			\end{itemize}
+		\end{proof}
+\end{frame}
+
+\begin{frame}
 	\frametitle{$T$ is Not Compact}
 	\begin{itemize}
-		\item 
+		\item When Ellner \& Rees proved their theorem about the compact IPM operator $T$, they used a theorem that only required there to be an $N \in \N$ such that $T^k$ is compact for $k \geq N$.
+		\pause
+		\item However, the proof in the written dissertation shows that $T^k$ fails to be compact for all $k \in \N$ when $g(y, x) = 0$ for $y < x$.
+		\pause
+		\item Thus, we will require a wholly different method in order to prove a similar theorem.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Helpful Definitions}
+	\begin{definition}
+		A closed convex set $K$ of the real Banach space $X$ is called a \emph{cone} if the following conditions hold:
+		\begin{itemize}
+			\item for any $x \in K$ and $a \geq 0$, the element $ax$ is in $K$,
+			\pause
+			\item for any pair $x$, $y \in K$, the element $x + y$ is in $K$, and
+			\pause
+			\item $K \cap -K = \{0\}$.
+		\end{itemize}
+	\end{definition}
+	\pause
+	For example, the set of nonnegative almost-everywhere functions in $L^1$ forms a cone.
+	\pause
+	\begin{definition}
+		For a Banach space $X$, its \emph{Banach dual space} $X^*$ is the collection of continuous linear functionals on $X$.
+	\end{definition}
+	\pause
+	For example, $L^\infty$ is the Banach dual of $L^1$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Helpful Definitions}
+	\begin{definition}
+		Given a bounded operator $T:X \to X$, its \emph{spectrum} $\sigma(T) \subset \C$ is the set
+		\[\sigma(T):=\{z \in \C \mid zI - T \text{ is not boundedly invertible}\}.\]
+		\pause
+		The \emph{spectral radius} $r(T)$ is given by
+		\[r(T):= \sup \{ |z| \mid z \in \sigma(T)\}.\]
+	\end{definition}
+		\pause
+	\begin{definition}
+		Given an operator $T:X \to X$, its \emph{resolvent} $R(z, T)$ is defined as $(zI - T)^{-1}$, which is holomorphic in the \emph{resolvent set} $\rho(T) := \C \setminus \sigma(T)$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Helpful Definitions}
+	\begin{definition}
+		Given a cone $K$ in a Banach space $X$, the \emph{dual cone} $K^* \subset X^*$ is the collection of all continuous linear functionals $x^*$ such that $\langle x, x^* \rangle \geq 0$ for all $x \in K$.
+	\end{definition}
+	\pause
+	For example, if $K \subset L^1$ is the standard cone, then $K^* \subset L^\infty$ is the collection of functionals represented by nonnegative functions.
+	\pause
+	\begin{definition}
+		An operator $T:X \to X$ is called \emph{positive} with respect to the cone $K \subset X$ if $T(K) \subset K$.
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Helpful Definitions}
+		\begin{definition}
+			Given a linear operator $T:X \to X$, its \emph{Banach adjoint} $T^*:X^* \to X^*$ is the unique operator such that $\langle Tx, x^* \rangle = \langle x, T^*x^* \rangle$. 
+		\end{definition}
+	\pause
+	For example, given an integral operator $T:L^1 \to L^1$ defined by
+	\[(T\varphi)(y) = \int_L^U k(y, t) \varphi(t) \, dt,\]
+	\pause
+	its Banach adjoint is given by ``transposing" the kernel function:
+	\[(T^*\varphi^*)(t) = \int_L^U k(y, t)\varphi^*(y) \, dy.\]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Helpful Definitions}
+		\begin{definition}
+			Given a cone $K$, and element $\varphi \in K$ is called \emph{quasi-interor} if $\langle \varphi, \varphi^* \rangle >0$ for all nonzero $\varphi^* \in K^*$
+		\end{definition}
+		\pause
+		For example, the quasi-interior elements of $K \subset L^1$ are the positive almost-everywhere integrable functions.
+		\pause
+		\begin{definition}
+			Given a cone $K$, an element $\varphi^* \in K^*$ is called \emph{strictly positive} if $\langle \varphi, \varphi^* \rangle > 0$ for all nonzero $\varphi \in K$.
+		\end{definition}
+		\pause
+		For the same cone above, the strictly positive elements of $K^* \subset L^\infty$ are those represented by positive almost-everywhere, essentially bounded functions.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Main Theorem}
+	\begin{theorem}[R., 2020]
+		Suppose that $T:L^1 \to L^1$ is an IPM operator such that $g(y, x) = 0$ for $y < x$. Then under biologically reasonable assumptions, $T$ has the following properties (among others):
+		\pause
+		\begin{itemize}
+			\item The spectral radius $\lambda = r(T)$ is a positive eigenvalue for $T$ and $T^*$. Moreover, the respective eigenvectors $\psi$ and $\psi^*$ span one-dimensional eigenspaces, $\psi$ is quasi-interior, $\psi^*$ represents a strictly positive linear functional, and both $\psi$, $\psi^*$ are the only eigenvectors of $T$, $T^*$ which can be scaled to be nonnegative almost-everywhere.
+			\pause
+			\item Suppose $\psi$ is scaled so that $||\psi||_1 = 1$, and $\psi^*$ is scaled so that $\langle \psi, \psi^* \rangle = 1$. Then for any nonzero $\psi_0 \in K$, we have
+			\[\lim_{n \to \infty} \frac{T^n \varphi_0}{\lambda^n} = \langle \varphi_0, \psi^* \rangle \psi.\]			
+		\end{itemize}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Main Theorem}
+	\begin{itemize}
+		\item This theorem is in large part a consequence of a general theorem of Marek \cite{Marek1970}, though the tools he used were introduced by Sawashima \cite{Sawashima1964}.
+		\pause
+		\item To apply Marek's theorem, we need to show two things:
+		\begin{enumerate}
+			\pause
+			\item $T$ is a \emph{nonsupporting} operator, and
+			\pause
+			\item $r(T)$ is a pole of the resolvent $R(z, T)$.
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$T$ is Nonsupporting}
+		
 \end{frame}
 
 \begin{frame}[allowframebreaks]
