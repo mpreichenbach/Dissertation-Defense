@@ -300,7 +300,127 @@
 
 \begin{frame}
 	\frametitle{$T$ is Nonsupporting}
-		
+		\begin{definition}
+			Suppose $T:X \to X$ is a positive operator with respect to the cone $K$, and usppose that $\varphi \in K$, $\varphi^* \in K^*$ are both nonzero.
+			\begin{itemize}
+				\pause
+				\item $T$ is called \emph{nonsupporting} if for every pair $\varphi$, $\varphi^*$ there exists a positive integer $p = p(\varphi, \varphi^*)$ such that $\langle T^n \varphi, \varphi^* \rangle > 0$ for every $n \geq p$.
+				\pause
+				\item $T$ is called \emph{strictly nonsupporting} if for every pair $\varphi$, $\varphi^*$ there is a positive integer $p = p(\varphi)$ such that $\langle T^n \varphi, \varphi^* \rangle > 0$ for $n \geq p$.
+			\end{itemize}
+		\end{definition}
+	\pause
+	Our non-compact IPM operator $T:L^1 \to L^1$ is in fact strictly non-supporting, and the integer $p$ actually doesn't depend on the choice of $\varphi \in L^1$ either.
+\end{frame}
+
+\begin{frame}
+	\frametitle{T is Nonsupporting}
+	\begin{itemize}
+		\item These concepts are useful because they are applicable to a general cone $K$.
+		\pause
+		\item But in our particular case of $K \subset L^1$, an operator $T$ is strictly nonsupporting if $T^n \varphi$ is positive almost-everywhere for every nonzero $\varphi \in K$ and sufficiently large $n$.
+		\pause
+		\item An easy condition to guarantee this is to assume $b(y) > 0$ almost everywhere.
+		\pause
+		\item However, this is biologically unrealistic. We instead imposed more conditions on the growth kernel $g(y, x)$, and which all IPMs satisfy (to our knowledge) in order to prove:
+		\pause
+		\begin{theorem}
+			The IPM operator $T$ is strictly nonsupporting (hence, nonsupporting) under biologically reasonable assumptions. Additionally, the integer $p$ does not depend on the choice of $\varphi \in L^1$.
+		\end{theorem}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item Recall that the \emph{resolvent} of an operator $T$ is defined to be $R(z, T) := (zI - T)^{-1}$, which is well-defined in the resolvent set $\rho(T) := \C \setminus \sigma(T)$.
+		\pause
+		\item To show that $r(T)$ is a pole of $R(z, T)$, we will apply the theorem
+	\end{itemize}
+	\pause
+	\begin{theorem}[Clement, 1987 \cite{Clement1987}]
+		Suppose that $z \in \sigma(T) \setminus \sigma_e(T)$, where $\sigma_e(T)$ denotes the \emph{essential spectrum}. Then $z$ is a pole of $R(z, T)$.
+	\end{theorem}
+	\begin{itemize}
+		\item With this theorem, you can intuitively think of the essential spectrum as ``the points in the spectrum that are not poles".
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{definition}
+		We say an element $z \in \sigma(T)$ is in the \emph{essential spectrum}, denoted $\sigma_e(T)$, if one of the following conditions holds:
+		\begin{enumerate}
+			\pause
+			\item The range of $(zI - T)$ is not closed,
+			\pause
+			\item $z$ is a limit point $\sigma(T)$, or
+			\pause
+			\item $\cup_{n=1}^\infty \ker(zI - T)^n$ is infinite-dimensional.
+		\end{enumerate}
+			\pause
+			The \emph{essential spectral radius} is the value
+			\[r_e(T) := \sup\{|z| \mid z \in \sigma_e(T)\}.\]
+	\end{definition}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item Hereafter, put $\lambda = r(T)$. To show the statement in the title of this slide, we need to show:
+		\begin{enumerate}
+			\pause
+			\item $\lambda \in \sigma(T)$, and
+			\pause
+			\item $\lambda \not \in \sigma_e(T)$.
+		\end{enumerate}
+	\end{itemize}
+	\pause
+	\begin{theorem}[Schaefer (1960), \cite{Schaefer1960}]
+		Let $K \subset X$ be a normal cone. If $A:X \to X$ is a positive operator with respect to $K$, then $\lambda = r(A)$ is an element of $\sigma(A)$.
+	\end{theorem}
+	\pause
+	\begin{itemize}
+		\item The cone $K \subset L^1$ of nonnegative a.e. functions is normal, and the IPM operator $T:L^1 \to L^1$ is positive w.r.t. $K$, so $\lambda \in \sigma(T)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item To show that $\lambda \not \in \sigma_e(T)$, we will exhibit a real-valued $\mu \in \sigma(T)$ such that $\mu > r_e(T)$.
+		\pause
+		\item This implies that
+		\[\lambda \geq \mu > r_e(T),\]
+		\pause
+		which in turn implies that $\lambda \not \in \sigma_e(T)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item The first step in this process is to compute $r_e(T)$.
+		\pause
+		\item There is a formula, due to Nussbaum \cite{Nussbaum1970} for $r_e(T)$:
+		\[r_e(T) = \lim_{n \to \infty} \beta(T^n)^{1/n},\]
+		\pause
+		where $\beta(T^n) := \beta(T^n(\mathscr{U}))$, and $\beta$ is the \emph{ball measure of noncompactness} (or ball-MNC).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{definition}
+		The \emph{ball-MNC}, also known as the \emph{Hausdorff-MNC}, of a subset $V$ of the vector space $X$ is given by
+		\[\beta(V) := \inf\{r > 0 \mid V \text{ can be covered by finitely many balls of radius } r\}\]
+	\end{definition}
+	\pause
+	\begin{itemize}
+		\item for $V \subset L^p$, there is a ``nice" formula for $\beta(V)$:
+			\[\beta(V) = \frac 12 \lim_{\dd \to 0} \sup_{\varphi \in V} \sup_{0 < \tau \leq \dd} ||\varphi - \varphi_\tau||_p,\]
+			where $\varphi_\tau(t) := \varphi(t+\tau)$.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]
