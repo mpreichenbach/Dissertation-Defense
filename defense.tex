@@ -423,9 +423,180 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item Since the mapping $bF:L^1 \to L^1$ has a one-dimensional range (spanned by $b = b(y))$,  it's compact.
+		\pause
+		\item Hence, the ball-MNC $\beta$ ``doesn't see it", and
+		\[\beta(T^k) = \beta((GS + bF)^k) = \beta((GS)^k).\] 
+		\vspace*{-\baselineskip}
+		\pause
+		\item This simplifies the problem a lot, and allows us to compute
+		\[r_e(T) = \lim_{n \to \infty} \beta(T^n)^{1/n} = \lim_{n \to \infty} \beta((GS)^n)^{1/n} = r_e((GS)^n)^{1/n}.\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+		\begin{theorem}[R., 2018]
+			Put $s_1:= \sup\{s(x)\} = s(U)$. Then
+			\begin{equation}
+				r_e(GS) \leq r(GS) \leq s_1. \label{radii}
+			\end{equation}
+			If $g(y, x) = 0$ for $y < x$, then equality holds in \eqref{radii}.
+		\end{theorem}
+	\pause
+	\begin{proof}[Proof sketch]
+		The first inequality follows from the fact that $\sigma_e(GS) \subset \sigma(GS)$, and the second follows from Gelfand's formula for the spectral radius:
+		\[r(GS) = \lim_{n \to \infty} ||(GS)^n||^{1/n}.\] \pause Assuming that $g(y, x) = 0$ for $y < x$, one can use the formula for $\beta$, with a properly chosen subsequence of functions in $L^1$, to show that $s_1 \leq r_e(GS)$.		
+	\end{proof}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{theorem}
+		Suppose $\mu \in \rho(GS)$, the resolvent set of $GS$, and define $\psi:=(\mu I - GS)^{-1} b$. If
+		\[F \psi = F(\mu I - GS)^{-1} b = 1,\]
+		\pause
+		then $\psi$ is an eigenvector for $T$ with eigenvalue $\mu$.
+		\pause
+		Conversely, if $v$ is an eigenvector for $T$ with eigenvalue $\mu \in \rho(GS)$, then $v$ is in the span of $\psi$, and $F \psi = 1$.
+	\end{theorem}
+	\pause
+	\begin{itemize}
+	\item This characterizes what eigenvectors look like, and tells us exactly when $T$ has an eigenvalue $\mu$ (so long as $\mu \in \rho(GS)$).
+	\pause
+	\item Recall that we want some $\mu$ such that
+	\[r(T) \geq \mu > r_e(T) = s_1.\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{theorem}[R., 2019]
+		Put $E:=(s_1, \infty)$, and define the function $P:E \to \R$ by
+		\[P(t):= F(t I - GS)^{-1}b,\]
+		where $GS$ satisfies biologically reasonable properties. Then:
+		\pause
+		\begin{enumerate}
+			\item $P$ is continuous,
+			\pause
+			\item $P$ is strictly decreasing,
+			\pause
+			\item $\lim_{t \to \infty} P(t) = 0$,
+			\pause
+			\item and if in addition there is an $\ee > 0$ such that $s(x) \equiv s_1$ for $x \in [U-\ee, U]$, then
+			\[\lim_{t \to s_1} P(t) = \infty.\]
+		\end{enumerate}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	Here's what $P(t)$ might look like because of this theorem:
+\begin{center}
+	\includegraphics[width=0.8\linewidth]{Images/P(t)_Plot}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$r(T)$ is a Pole of the Resolvent}
+	\begin{itemize}
+		\item This theorem guarantees the existence of a (unique) $\mu > s_1$ such that
+		\[P(\mu) = F(\mu I - GS)^{-1}b = 1.\]
+		\vspace*{-\baselineskip}
+		\pause
+		\item Hence, $\mu$ is an eigenvalue of $T$, so $\mu \in \sigma(T)$.
+		\pause
+		\item Additionally, for $\lambda = r(T)$,
+		\[\lambda \geq \mu > s_1 = r_e(GS).\]
+		\pause
+		Thus, we can conclude that $\lambda \not \in \sigma_e(T)$. This is the last ingredient we needed to prove...
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{theorem}[R., 2020]
+	Suppose that $T:L^1 \to L^1$ is an IPM operator such that $g(y, x) = 0$ for $y < x$. Then under biologically reasonable assumptions, $T$ has the following properties (among others):
+	\pause
+	\begin{itemize}
+		\item The spectral radius $\lambda = r(T)$ is a positive eigenvalue for $T$ and $T^*$. Moreover, the respective eigenvectors $\psi$ and $\psi^*$ span one-dimensional eigenspaces, $\psi$ is quasi-interior, $\psi^*$ represents a strictly positive linear functional, and both $\psi$, $\psi^*$ are the only eigenvectors of $T$, $T^*$ which can be scaled to be nonnegative almost-everywhere.
+		\pause
+		\item Suppose $\psi$ is scaled so that $||\psi||_1 = 1$, and $\psi^*$ is scaled so that $\langle \psi, \psi^* \rangle = 1$. Then for any nonzero $\psi_0 \in K$, we have
+		\[\lim_{n \to \infty} \frac{T^n \varphi_0}{\lambda^n} = \langle \varphi_0, \psi^* \rangle \psi.\]			
+	\end{itemize}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Questions or Comments?}
+	\begin{enumerate}
+		\pause
+		\item Question?
+		\begin{itemize}
+			\pause
+			\item Comment.
+			\pause
+			\item Comment.
+		\end{itemize}
+		\pause
+		\item Question?
+			\begin{itemize}
+			\pause
+			\item Comment.
+			\pause
+			\item Question?
+				\begin{enumerate}
+					\pause
+					\item Comment.
+					\pause
+					\item Comment.
+				\end{enumerate}
+			\end{itemize}
+	\end{enumerate}
+\end{frame}
+
 \begin{frame}[allowframebreaks]
 	\frametitle{References}
 		\printbibliography
+\end{frame}
+
+\begin{frame}
+	\frametitle{Estimating the Spectral Radius}
+	\begin{itemize}
+		\item An important question is whether one can estimate $\lambda = r(T)$ on a computer when $T$ is not compact.
+		\pause
+		\item The standard methods of doing this when the operator is compact rely on approximating it uniformly with matrices.
+		\pause
+		\item But these methods do not work when $T$ is not compact.
+		\pause
+		\item I was not able to fully resolve this question, but I did prove that the spectral radii of certain compact operators approach the spectral radius of $T$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Estimating the Spectral Radius}
+	\begin{itemize}
+		\item Before I state the result, define the functions
+		\pause
+		\begin{align*}
+			Q(t) &:= -1 + F(t I - GS)^{-1} b = -1 + \sum_{k = 0}^\infty \frac{F((GS)^kb)}{t^{k+1}}, \\
+			Q_n(t) &:= -1 + \sum_{k = 0}^n \frac{F((GS)^kb)}{t^{k+1}}, \\
+			Q_{n, \dd}(t) &:= -1 + \sum_{k = 0}^n \frac{F((G_\dd S)^kb)}{t^{k+1}},
+		\end{align*}
+		\pause
+		where $G_\dd$ is the integral operator with kernel equal to $g(y, x)$ on $[L, U-\dd] \times [L, U]$, and $0$ otherwise.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Estimating the Spectral Radius}
+	\begin{theorem}[R., 2020]
+		For every $\ee>0$, there is an $N \in \N$ and a $\dd(N) >0$ such that for any $n \geq N$ and $\dd < \dd(N)$, we have
+		\[|z_{n,\dd} - \lambda| < \ee, \]
+		where $z_{n,\dd}$ is the unique zero of $Q_{n, \dd}$, and $\lambda$ is the unique zero of $Q$ (i.e., the spectral radius of $T$). 
+	\end{theorem}
 \end{frame}
 
 %\begin{frame}
