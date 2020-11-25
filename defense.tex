@@ -77,7 +77,8 @@
 	\pause
 	\begin{theorem}
 		Suppose $A$ is an IPM operator whose kernel $k(y, x)$ is positive and continuous on $[L, U]^2$. Then $\lambda = r(A)$ is an eigenvalue of $A$, and its eigenvector $\psi$ can be scaled to be positive. Additionally, $\lambda$ is the asymptotic growth rate of the population, and $\psi$ is the stable stage distribution, in the sense that for any nonzero initial population $\varphi_0$,
-		\[\lim_{n \to \infty} \frac{A^n \varphi_0}{\lambda^n} = \langle \psi, \varphi_0 \rangle \psi. \]
+		\[\lim_{n \to \infty} \frac{A^n \varphi_0}{\lambda^n} = C \psi, \]
+		where $C>0$.
 	\end{theorem}
 \end{frame}
 
@@ -257,7 +258,7 @@
 \begin{frame}
 	\frametitle{Helpful Definitions}
 		\begin{definition}
-			Given a cone $K$, and element $\varphi \in K$ is called \emph{quasi-interor} if $\langle \varphi, \varphi^* \rangle >0$ for all nonzero $\varphi^* \in K^*$
+			Given a cone $K$, an element $\varphi \in K$ is called \emph{quasi-interor} if $\langle \varphi, \varphi^* \rangle >0$ for all nonzero $\varphi^* \in K^*$
 		\end{definition}
 		\pause
 		For example, the quasi-interior elements of $K \subset L^1$ are the positive almost-everywhere integrable functions.
@@ -266,7 +267,7 @@
 			Given a cone $K$, an element $\varphi^* \in K^*$ is called \emph{strictly positive} if $\langle \varphi, \varphi^* \rangle > 0$ for all nonzero $\varphi \in K$.
 		\end{definition}
 		\pause
-		For the same cone above, the strictly positive elements of $K^* \subset L^\infty$ are those represented by positive almost-everywhere, essentially bounded functions.
+		For the same cone $K$ above, the strictly positive elements of $K^* \subset L^\infty$ are those represented by positive almost-everywhere, essentially bounded functions.
 \end{frame}
 
 \begin{frame}
@@ -301,7 +302,7 @@
 \begin{frame}
 	\frametitle{$T$ is Nonsupporting}
 		\begin{definition}
-			Suppose $T:X \to X$ is a positive operator with respect to the cone $K$, and usppose that $\varphi \in K$, $\varphi^* \in K^*$ are both nonzero.
+			Suppose $T:X \to X$ is a positive operator with respect to the cone $K$, and suppose that $\varphi \in K$, $\varphi^* \in K^*$ are both nonzero.
 			\begin{itemize}
 				\pause
 				\item $T$ is called \emph{nonsupporting} if for every pair $\varphi$, $\varphi^*$ there exists a positive integer $p = p(\varphi, \varphi^*)$ such that $\langle T^n \varphi, \varphi^* \rangle > 0$ for every $n \geq p$.
@@ -322,7 +323,7 @@
 		\pause
 		\item An easy condition to guarantee this is to assume $b(y) > 0$ almost everywhere.
 		\pause
-		\item However, this is biologically unrealistic. We instead imposed more conditions on the growth kernel $g(y, x)$, and which all IPMs satisfy (to our knowledge) in order to prove:
+		\item However, this is not a biologically realistic assumption. We instead imposed more conditions on the growth kernel $g(y, x)$, and which all IPMs satisfy (to our knowledge) in order to prove:
 		\pause
 		\begin{theorem}
 			The IPM operator $T$ is strictly nonsupporting (hence, nonsupporting) under biologically reasonable assumptions. Additionally, the integer $p$ does not depend on the choice of $\varphi \in L^1$.
@@ -374,6 +375,8 @@
 			\pause
 			\item $\lambda \not \in \sigma_e(T)$.
 		\end{enumerate}
+	\pause
+	\item The first inclusion is straightforward:
 	\end{itemize}
 	\pause
 	\begin{theorem}[Schaefer (1960), \cite{Schaefer1960}]
@@ -444,7 +447,7 @@
 			\begin{equation}
 				r_e(GS) \leq r(GS) \leq s_1. \label{radii}
 			\end{equation}
-			If $g(y, x) = 0$ for $y < x$, then equality holds in \eqref{radii}.
+			If $g(y, x) = 0$ for $y < x$, then equalities hold in \eqref{radii}.
 		\end{theorem}
 	\pause
 	\begin{proof}[Proof sketch]
@@ -495,6 +498,7 @@
 \begin{frame}
 	\frametitle{$r(T)$ is a Pole of the Resolvent}
 	Here's what $P(t)$ might look like because of this theorem:
+	\pause
 \begin{center}
 	\includegraphics[width=0.8\linewidth]{Images/P(t)_Plot}
 \end{center}
@@ -526,6 +530,31 @@
 		\item Suppose $\psi$ is scaled so that $||\psi||_1 = 1$, and $\psi^*$ is scaled so that $\langle \psi, \psi^* \rangle = 1$. Then for any nonzero $\psi_0 \in K$, we have
 		\[\lim_{n \to \infty} \frac{T^n \varphi_0}{\lambda^n} = \langle \varphi_0, \psi^* \rangle \psi.\]			
 	\end{itemize}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Estimating the Spectral Radius}
+	\begin{itemize}
+		\item Before I state the result, define the functions
+		\pause
+		\begin{align*}
+		Q(t) &:= -1 + F(t I - GS)^{-1} b = -1 + \sum_{k = 0}^\infty \frac{F((GS)^kb)}{t^{k+1}}, \\
+		Q_n(t) &:= -1 + \sum_{k = 0}^n \frac{F((GS)^kb)}{t^{k+1}}, \\
+		Q_{n, \dd}(t) &:= -1 + \sum_{k = 0}^n \frac{F((G_\dd S)^kb)}{t^{k+1}},
+		\end{align*}
+		\pause
+		where $G_\dd$ is the integral operator with kernel equal to $g(y, x)$ on $[L, U-\dd] \times [L, U]$, and $0$ otherwise.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Estimating the Spectral Radius}
+	\begin{theorem}[R., 2020]
+		For every $\ee>0$, there is an $N \in \N$ and a $\dd(N) >0$ such that for any $n \geq N$ and $\dd < \dd(N)$, we have
+		\[|z_{n,\dd} - \lambda| < \ee, \]
+		where $z_{n,\dd}$ is the unique zero of $Q_{n, \dd}$, and $\lambda$ is the unique zero of $Q$ (i.e., the spectral radius of $T$). 
 	\end{theorem}
 \end{frame}
 
@@ -575,29 +604,6 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Estimating the Spectral Radius}
-	\begin{itemize}
-		\item Before I state the result, define the functions
-		\pause
-		\begin{align*}
-			Q(t) &:= -1 + F(t I - GS)^{-1} b = -1 + \sum_{k = 0}^\infty \frac{F((GS)^kb)}{t^{k+1}}, \\
-			Q_n(t) &:= -1 + \sum_{k = 0}^n \frac{F((GS)^kb)}{t^{k+1}}, \\
-			Q_{n, \dd}(t) &:= -1 + \sum_{k = 0}^n \frac{F((G_\dd S)^kb)}{t^{k+1}},
-		\end{align*}
-		\pause
-		where $G_\dd$ is the integral operator with kernel equal to $g(y, x)$ on $[L, U-\dd] \times [L, U]$, and $0$ otherwise.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Estimating the Spectral Radius}
-	\begin{theorem}[R., 2020]
-		For every $\ee>0$, there is an $N \in \N$ and a $\dd(N) >0$ such that for any $n \geq N$ and $\dd < \dd(N)$, we have
-		\[|z_{n,\dd} - \lambda| < \ee, \]
-		where $z_{n,\dd}$ is the unique zero of $Q_{n, \dd}$, and $\lambda$ is the unique zero of $Q$ (i.e., the spectral radius of $T$). 
-	\end{theorem}
-\end{frame}
 
 %\begin{frame}
 %	\frametitle{}
